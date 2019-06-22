@@ -12,7 +12,7 @@ module.exports = {
           collapseWhitespace: true,
           preserveLineBreaks: false
         },
-        // googleAnalytics: googleAnalytics(),
+        googleAnalytics: googleAnalytics(),
         links: [
           {
             href: 'https://fonts.googleapis.com/css?family=Iceberg&display=swap',
@@ -54,7 +54,7 @@ function googleAnalytics () {
     return undefined;
   }
   return {
-    // trackingId: 'UA-137847359-1',
+    trackingId: 'UA-142544613-1',
     pageViewOnLoad: true
   }
 }
