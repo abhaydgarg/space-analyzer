@@ -1,0 +1,8 @@
+{
+  "javascript.validate.enable": false,
+  "standard.enable": true,
+  "standard.autoFixOnSave": false,
+  "standard.semistandard": true,
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "javascript.format.insertSpaceAfterConstructor": true
+}

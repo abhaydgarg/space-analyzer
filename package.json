@@ -1,0 +1,57 @@
+{
+  "name": "space-analyzer",
+  "version": "1.0.0",
+  "description": "Space analyzer is a tool that visualizes disk or directory usage.",
+  "scripts": {
+    "start": "neutrino start",
+    "build": "neutrino build",
+    "print:webpack:config": "neutrino start --inspect-new",
+    "output:webpack:config": "neutrino start --inspect-new > webpack.config.js"
+  },
+  "dependencies": {
+    "@abhaydgarg/is": "^1.1.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "@tippy.js/react": "^2.2.2",
+    "cogo-toast": "^3.1.0",
+    "d3": "^5.9.2",
+    "icicle-chart": "^1.0.6",
+    "normalize.css": "^8.0.1",
+    "pretty-bytes": "^5.2.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-dropzone": "^10.1.5"
+  },
+  "devDependencies": {
+    "@neutrinojs/react": "^8.3.0",
+    "babel-eslint": "^10.0.1",
+    "neutrino": "^8.3.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "semistandard": "^13.0.1"
+  },
+  "semistandard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "/docs"
+    ]
+  },
+  "keywords": [
+    "space",
+    "disk",
+    "folder",
+    "directory",
+    "analyze",
+    "analyzer",
+    "visualize",
+    "usage"
+  ],
+  "author": "Abhay Garg",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhaydgarg/space-analyzer.git"
+  }
+}

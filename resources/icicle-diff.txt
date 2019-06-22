@@ -1,0 +1,22 @@
+File = node_modules/icicle-chart/dist/icicle-chart.module.js
+
+Line 308
+- state.tooltip.html("\n          <div class=\"tooltip-title\">".concat(getNodeStack(d).map(function (d) {
+        return nameOf(d.data);
+      }).join(' &rarr; '), "</div>\n          ").concat(state.tooltipContent(d.data, d), "\n        "));
++ state.tooltip.html(state.tooltipContent(d.data, d));
+
+Line 40
+
+[.icicle-viz text]
+- font-family: sans-serif;
+
+[.icicle-tooltip]
+- white-space: nowrap;
++ word-wrap: break-word;
+- font: 12px sans-serif;
++ font-size: 12px;
+- color: #eee;
++ color: #f5f5f5;
+- background: rgba(0,0,0,0.65);
++ background: rgba(33,33,33,0.9);
