@@ -1,0 +1,25 @@
+{
+  "name": "treemap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "neutrino build",
+    "start": "neutrino start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "echarts": "^4.2.1",
+    "echarts-for-react": "^2.0.15-beta.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.11.1"
+  },
+  "devDependencies": {
+    "@neutrinojs/react": "^8.3.0",
+    "neutrino": "^8.3.0"
+  }
+}
