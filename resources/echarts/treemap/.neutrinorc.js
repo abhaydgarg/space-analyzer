@@ -4,7 +4,7 @@ module.exports = {
       '@neutrinojs/react',
       {
         html: {
-          title: 'treemap',
+          title: 'treemap | echarts',
           links: [
             {
               href: 'https://fonts.googleapis.com/css?family=Iceberg&display=swap',
