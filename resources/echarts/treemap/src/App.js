@@ -47,7 +47,8 @@ export default class App extends Component {
         },
         label: {
           show: true,
-          // Show data `name` property.
+          // Show data `name`
+          // property.
           formatter: '{b}',
         },
         upperLabel: {
@@ -58,14 +59,14 @@ export default class App extends Component {
         },
         itemStyle: {
           normal: {
-            borderColor: '#565656'
+            borderColor: '#959595'
           }
         },
         levels: [
           {
             itemStyle: {
               normal: {
-                borderColor: '#777',
+                borderColor: 'transparent',
                 borderWidth: 0,
                 gapWidth: 1
               }
@@ -79,12 +80,17 @@ export default class App extends Component {
           {
             itemStyle: {
               normal: {
-                borderColor: '#555',
+                borderColor: '#b2a429',
                 borderWidth: 5,
                 gapWidth: 1
               },
               emphasis: {
-                borderColor: '#ddd'
+                borderColor: '#ffeb3b'
+              }
+            },
+            upperLabel: {
+              emphasis: {
+                color: '#212121'
               }
             }
           },
@@ -166,6 +172,7 @@ export default class App extends Component {
           </span>
         </div>
         <ReactEcharts
+          theme='light'
           notMerge
           ref={this.chart}
           option={this.getOption()}
