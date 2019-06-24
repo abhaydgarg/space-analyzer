@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
-import echarts from 'echarts';
+import React, { Component, Fragment } from 'react';
 import ReactEcharts from 'echarts-for-react';
 
 import './App.css';
-
-import data from './data';
 
 export default class App extends Component {
   constructor(props) {
@@ -17,33 +14,36 @@ export default class App extends Component {
 
   getOption = () => {
     const option = {
+      // Global textStyle.
       textStyle: {
         fontFamily: 'Iceberg',
         fontSize: 12,
         color: '#f5f5f5'
       },
       tooltip: {
+        confine: true,
+        backgroundColor: 'rgba(33,33,33, 0.9)',
+        textStyle: {
+          fontSize: 12
+        },
         formatter: function (info) {
-          var value = info.value;
-          var treePathInfo = info.treePathInfo;
-          var treePath = [];
-
-          for (var i = 1; i < treePathInfo.length; i++) {
-            treePath.push(treePathInfo[i].name);
-          }
-          return [
-            '<div class="tooltip-title">' + echarts.format.encodeHTML(treePath.join('/')) + '</div>',
-            'Disk Usage: ' + echarts.format.addCommas(value) + ' KB',
-          ].join('');
+          const d = info.data;
+          return (
+            `<b class='txt-primary'>KIND:</b> <span>${d.kind}</span><br/>
+            <b class='txt-primary'>NAME:</b> <span>${d.name}</span><br/>
+            <b class='txt-primary'>SIZE:</b> <span>${d.size}</span><br/>
+            <span class='txt-muted txt-sm'>${d.path}</span>`
+          );
         }
       },
       series: [{
-        data: data,
+        data: [this.props.data],
         name: 'space-analyzer',
         type: 'treemap',
         visibleMin: 300,
+        // colorMappingBy: 'value',
         breadcrumb: {
-          show: true
+          show: false
         },
         label: {
           show: true,
@@ -58,7 +58,7 @@ export default class App extends Component {
         },
         itemStyle: {
           normal: {
-            borderColor: '#fff'
+            borderColor: '#565656'
           }
         },
         levels: [
@@ -105,35 +105,76 @@ export default class App extends Component {
   }
 
   handleChartReady = () => {
-    this.setState({
-      rendering: false
-    });
+    setTimeout(() => {
+      this.setState({
+        rendering: false
+      });
+    }, 0);
   }
 
   handleClick = (params, e) => {
-    //console.log(params);
+    // Send to List and Breadcrumb comps.
+    // List comp can simply use `children`
+    // property to render items.
+    // Breadcrumb has to use `parent` property
+    // and backtrack till parent is `null` to
+    // list items.
+
+    // console.log(params.data);
   }
 
-  zoomToNode = () => {
+  // `id` is a glue among Chart, List and Breadcrumb
+  // components.
+  handleZoomToNode = (id) => {
     const instance = this.chart.current.getEchartsInstance();
+    instance.dispatchAction({
+      type: 'highlight',
+      id: id
+    });
+  }
+
+  handleReset = () => {
+    const instance = this.chart.current.getEchartsInstance();
+    instance.dispatchAction({
+      type: 'dataZoom',
+      start: 0,
+      end: 0
+    });
 
   }
 
   render() {
+    // "root/npm/_cacache/content-v2/sha512/54"
+    // id: 9957
+    // dataIndex = 9958
+    // RESULT: Should see 63 node in center.
+    const nodeIdToZoomTo = 9957;
     return (
-      <div>
+      <Fragment>
+        <div className='demo-links'>
+          <span
+            className='demo-link-txt'
+            onClick={() => this.handleZoomToNode(nodeIdToZoomTo)}
+          >
+            Zoom to node
+          </span>
+          <span
+            className='demo-link-txt'
+            onClick={() => this.handleReset()}
+          >
+            Reset
+          </span>
+        </div>
         <ReactEcharts
+          notMerge
           ref={this.chart}
           option={this.getOption()}
           style={{ height: '500px', width: '100%' }}
-          className='treemap-chart'
-          notMerge
           showLoading={this.state.rendering}
-          hideLoading={this.state.rendering}
           loadingOption={{
             text: '',
             color: '#f5f5f5',
-            textColor: '#e0e0e0',
+            textColor: '#f5f5f5',
             maskColor: '#303030',
             zlevel: 0
           }}
@@ -142,7 +183,7 @@ export default class App extends Component {
             'click': this.handleClick
           }}
         />
-      </div>
+      </Fragment>
     );
   }
 }
