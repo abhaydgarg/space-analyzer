@@ -1,0 +1,60 @@
+[1]. FILE: node_modules/echarts/lib/view/Chart.js
+Line: 107
+Function: highlight: function (seriesModel, ecModel, api, payload)
+
+#comment line:
+// toggleHighlight(seriesModel.getData(), payload, 'emphasis');
+
+#add code:
+##When you have node already
+if (payload.node) {
+  this._zoomToNode({
+      node: payload.node
+  });
+}
+
+===OR===
+
+## To get node by id
+var viewRoot = seriesModel.getViewRoot();
+var node = viewRoot.getNodeById(payload.id);
+if (node) {
+  this._zoomToNode({
+    node: node
+  });
+}
+
+===OR===
+
+## To get node by dataIndex
+var viewRoot = seriesModel.getViewRoot();
+// It loop all nodes even when node is found.
+// var targetInfo = null;
+// viewRoot.eachNode({ attr: 'viewChildren', order: 'preorder' }, function (node) {
+//   if (payload.dataIndex === node.dataIndex) {
+//     targetInfo = { node: node };
+//   }
+// }, this);
+// if (targetInfo !== null) {
+//  this._zoomToNode(targetInfo);
+// }
+
+var node = viewRoot.hostTree.getNodeByDataIndex(payload.dataIndex);
+if (node) {
+this._zoomToNode({
+  node: node
+});
+
+[2]. FILE: node_modules/echarts/lib/chart/helper/treeHelper.js
+Line: 84
+Function: function wrapTreePathInfo(node, seriesModel)
+
+[NOTE]: Use it when you are using `id` to communicate among comps. Do not use if you are using node directly.
+
+#Add `id` propserty in:
+treePathInfo.push({
+  id: node.getId(),
+  name: node.name,
+  dataIndex: nodeDataIndex,
+  value: seriesModel.getRawValue(nodeDataIndex)
+});

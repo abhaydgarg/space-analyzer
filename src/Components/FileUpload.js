@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
 import Toast from 'cogo-toast';
 
-import demo from '../demo.json';
-
 let data = null;
 
 export default function FileUpload (props) {
@@ -58,7 +56,7 @@ export default function FileUpload (props) {
 
   const handleDemoBtn = (e) => {
     e.stopPropagation();
-    props.handleFileData(demo);
+    props.handleFileData(require('../fixture.json'));
   };
 
   const {

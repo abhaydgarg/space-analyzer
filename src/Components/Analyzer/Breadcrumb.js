@@ -4,13 +4,11 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons';
 
 export default function Breadcrumb (props) {
   const getAllParent = () => {
-    let stack = [];
-    let curNode = props.node.__dataNode;
-    while (curNode !== null) {
-      stack.unshift(curNode);
-      curNode = curNode.parent;
-    }
-    return stack;
+    let parents = props.node.getAncestors();
+    // Remove first element
+    // which is `space-analyzer`.
+    parents.shift();
+    return parents;
   };
 
   const handleNode = (node) => {
@@ -23,15 +21,21 @@ export default function Breadcrumb (props) {
         {
           getAllParent().map((item, index) => {
             return (
-              <div className='breadcrumb' key={index} onClick={() => handleNode(item.data)}>
+              <div className='breadcrumb' key={index} onClick={() => handleNode(item)}>
                 <span className='sep'>
                   <FontAwesomeIcon icon={faFolder} size='sm' />
                 </span>
-                <span className='item'>{item.data.name}</span>
+                <span className='item'>{item.name}</span>
               </div>
             );
           })
         }
+        <div className='breadcrumb'>
+          <span className='sep'>
+            <FontAwesomeIcon icon={faFolder} size='sm' />
+          </span>
+          <span className='item'>{props.node.name}</span>
+        </div>
       </nav>
     </div>
   );

@@ -9,14 +9,13 @@
     "output:webpack:config": "neutrino start --inspect-new > webpack.config.js"
   },
   "dependencies": {
-    "@abhaydgarg/is": "^1.1.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@tippy.js/react": "^2.2.2",
     "cogo-toast": "^3.1.0",
-    "d3": "^5.9.2",
-    "icicle-chart": "^1.0.6",
+    "echarts": "^4.2.1",
+    "echarts-for-react": "^2.0.15-beta.0",
     "normalize.css": "^8.0.1",
     "pretty-bytes": "^5.2.0",
     "prop-types": "^15.7.2",

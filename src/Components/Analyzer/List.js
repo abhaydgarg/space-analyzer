@@ -1,10 +1,11 @@
 import { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { isArray } from '@abhaydgarg/is';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder, faFileAlt, faLevelUpAlt, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippy.js/react';
 import prettyBytes from 'pretty-bytes';
+
+import Helper from '../../Helper';
 
 const icons = {
   'Directory': faFolder,
@@ -21,11 +22,12 @@ export default class List extends Component {
     this.props.handleNode(node);
   }
 
+  // @TODO: Implement trigger.
   handleLevelUp = () => {
     // If node's parent is not a root node.
-    if (this.props.node.__dataNode.parent !== null) {
-      this.props.handleNode(this.props.node.__dataNode.parent.data);
-    }
+    // if (this.props.node.__dataNode.parent !== null) {
+    //   this.props.handleNode(this.props.node.__dataNode.parent.data);
+    // }
   }
 
   handleTooltipShow = (instance) => {
@@ -59,7 +61,7 @@ export default class List extends Component {
   renderRoot = () => {
     const node = this.props.node;
     let name = node.name;
-    let size = prettyBytes(node.size);
+    let size = prettyBytes(node.getValue());
 
     return (
       <div className='item root'>
@@ -82,33 +84,32 @@ export default class List extends Component {
     const node = this.props.node;
     let items = [];
 
-    if (isArray(node.children)) {
+    if (node.children) {
       items = node.children;
     }
 
-    // Sort items by size in descending order.
-    return items.sort((a, b) => {
-      return b.size - a.size;
-    }).map((item, index) => {
+    // @TODO: Sort items by size in descending order.
+    return items.map((item) => {
+      const data = Helper.getData(item);
       return (
         <Tippy
-          key={index}
+          key={data.id}
           a11y={false}
           animation='fade'
           animateFill={false}
           followCursor
           maxWidth='320px'
           className='list-item-tooltip'
-          content={this.getTooltipContent(item)}
+          content={this.getTooltipContent(data)}
           onTrigger={this.handleTooltipTrigger}
           onShow={this.handleTooltipShow}
         >
           <div className='item' onClick={() => this.handleNode(item)}>
             <span className='name'>
-              <FontAwesomeIcon icon={icons[item.kind]} size='sm' className='icon' />
+              <FontAwesomeIcon icon={icons[data.kind]} size='sm' className='icon' />
               {item.name}
             </span>
-            <span className='size'>{prettyBytes(item.size)}</span>
+            <span className='size'>{prettyBytes(data.size)}</span>
           </div>
         </Tippy>
       );

@@ -4,5 +4,6 @@
   "standard.autoFixOnSave": false,
   "standard.semistandard": true,
   "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
-  "javascript.format.insertSpaceAfterConstructor": true
+  "javascript.format.insertSpaceAfterConstructor": true,
+  "editor.formatOnSave": true
 }
