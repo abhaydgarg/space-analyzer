@@ -65,6 +65,10 @@ export default class Chart extends Component {
         name: 'space-analyzer',
         type: 'treemap',
         visibleMin: 300,
+        width: '95%',
+        height: '90%',
+        left: 'left',
+        top: 'top',
         // colorMappingBy: 'value',
         breadcrumb: {
           show: false
@@ -73,7 +77,7 @@ export default class Chart extends Component {
           show: true,
           // Show data `name`
           // property.
-          formatter: '{b}',
+          formatter: '{b}'
         },
         upperLabel: {
           normal: {
