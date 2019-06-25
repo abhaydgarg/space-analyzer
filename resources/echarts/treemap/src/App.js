@@ -119,18 +119,13 @@ export default class App extends Component {
   }
 
   handleClick = (params, e) => {
-    // Send to List and Breadcrumb comps.
-    // List comp can simply use `children`
-    // property to render items.
-    // Breadcrumb has to use `parent` property
-    // and backtrack till parent is `null` to
-    // list items.
-
-    // console.log(params.data);
+    // Send `params.data.children` to List comp.
+    // Send `params.treePathInfo` to Breadcrumb comp.
+    console.log(params);
   }
 
-  // `id` is a glue among Chart, List and Breadcrumb
-  // components.
+  // `id` what you get from List and
+  // Breadcrumb comps.
   handleZoomToNode = (id) => {
     const instance = this.chart.current.getEchartsInstance();
     instance.dispatchAction({

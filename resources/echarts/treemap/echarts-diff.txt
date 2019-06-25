@@ -35,3 +35,15 @@ if (node) {
 this._zoomToNode({
   node: node
 });
+
+FILE: node_modules/echarts/lib/chart/helper/treeHelper.js
+Line: 84
+Function: function wrapTreePathInfo(node, seriesModel)
+
+#Add `id` propserty in:
+treePathInfo.push({
+  id: node.getId(),
+  name: node.name,
+  dataIndex: nodeDataIndex,
+  value: seriesModel.getRawValue(nodeDataIndex)
+});
