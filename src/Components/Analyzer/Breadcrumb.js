@@ -1,47 +1,72 @@
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
 
-export default function Breadcrumb (props) {
-  const getAllParent = () => {
-    let parents = props.node.getAncestors();
+import Helper from '../../Helper';
+
+export default class Breadcrumb extends Component {
+  static propTypes = {
+    node: PropTypes.object.isRequired,
+    handleNode: PropTypes.func.isRequired
+  };
+
+  constructor (props) {
+    super(props);
+    this.breadcrumbsRef = React.createRef();
+  }
+
+  componentDidMount () {
+    this.breadcrumbsRef.current.addEventListener('animationend', () => {
+      this.breadcrumbsRef.current.classList.remove('fadeIn');
+    });
+  }
+
+  componentWillUnmount () {
+    this.breadcrumbsRef.current.removeEventListener('animationend', Helper.noop());
+  }
+
+  componentDidUpdate () {
+    // Play animation whenever comp is updated.
+    this.breadcrumbsRef.current.classList.add('fadeIn');
+  }
+
+  getAllParent = () => {
+    let parents = this.props.node.getAncestors();
     // Remove first element
     // which is `space-analyzer`.
     parents.shift();
     return parents;
-  };
+  }
 
-  const handleNode = (node) => {
-    props.handleNode(node);
-  };
+  handleNode = (node) => {
+    this.props.handleNode(node);
+  }
 
-  return (
-    <div className='breadcrumbs'>
-      <nav className='nav'>
-        {
-          getAllParent().map((item, index) => {
-            return (
-              <div className='breadcrumb' key={index} onClick={() => handleNode(item)}>
-                <span className='sep'>
-                  <FontAwesomeIcon icon={faFolder} size='sm' />
-                </span>
-                <span className='item'>{item.name}</span>
-              </div>
-            );
-          })
-        }
-        <div className='breadcrumb'>
-          <span className='sep'>
-            <FontAwesomeIcon icon={faFolder} size='sm' />
-          </span>
-          <span className='item'>{props.node.name}</span>
-        </div>
-      </nav>
-    </div>
-  );
+  render () {
+    return (
+      <div className='breadcrumbs animated fadeIn' ref={this.breadcrumbsRef}>
+        <nav className='nav'>
+          {
+            this.getAllParent().map((item, index) => {
+              return (
+                <div className='breadcrumb' key={index} onClick={() => this.handleNode(item)}>
+                  <span className='sep'>
+                    <FontAwesomeIcon icon={faFolder} size='sm' />
+                  </span>
+                  <span className='item'>{item.name}</span>
+                </div>
+              );
+            })
+          }
+          <div className='breadcrumb'>
+            <span className='sep'>
+              <FontAwesomeIcon icon={faFolder} size='sm' />
+            </span>
+            <span className='item'>{this.props.node.name}</span>
+          </div>
+        </nav>
+      </div>
+    );
+  }
 }
-
-Breadcrumb.propTypes = {
-  node: PropTypes.object.isRequired,
-  handleNode: PropTypes.func.isRequired
-};

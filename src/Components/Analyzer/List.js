@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder, faFileAlt, faLevelUpAlt, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
@@ -18,16 +18,36 @@ export default class List extends Component {
     handleNode: PropTypes.func.isRequired
   };
 
+  constructor (props) {
+    super(props);
+    this.listItemsRef = React.createRef();
+  }
+
+  componentDidMount () {
+    this.listItemsRef.current.addEventListener('animationend', () => {
+      this.listItemsRef.current.classList.remove('animated', 'fadeIn');
+    });
+  }
+
+  componentWillUnmount () {
+    this.listItemsRef.current.removeEventListener('animationend', Helper.noop());
+  }
+
+  componentDidUpdate () {
+    // Play animation whenever comp is updated.
+    this.listItemsRef.current.classList.add('animated', 'fadeIn');
+  }
+
   handleNode = (node) => {
     this.props.handleNode(node);
   }
 
-  // @TODO: Implement trigger.
   handleLevelUp = () => {
     // If node's parent is not a root node.
-    // if (this.props.node.__dataNode.parent !== null) {
-    //   this.props.handleNode(this.props.node.__dataNode.parent.data);
-    // }
+    // `space-analyzer` has dataIndex = 0
+    if (this.props.node.parentNode.dataIndex !== 0) {
+      this.props.handleNode(this.props.node.parentNode);
+    }
   }
 
   handleTooltipShow = (instance) => {
@@ -59,14 +79,10 @@ export default class List extends Component {
   }
 
   renderRoot = () => {
-    const node = this.props.node;
-    let name = node.name;
-    let size = prettyBytes(node.getValue());
-
     return (
       <div className='item root'>
-        <span className='name'>{name}</span>
-        <span className='size'>{size}</span>
+        <span className='name'>{this.props.node.name}</span>
+        <span className='size'>{prettyBytes(this.props.node.getValue())}</span>
       </div>
     );
   }
@@ -81,14 +97,14 @@ export default class List extends Component {
   }
 
   renderItems = () => {
-    const node = this.props.node;
     let items = [];
 
-    if (node.children) {
-      items = node.children;
+    if (this.props.node.children) {
+      items = this.props.node.children;
     }
 
-    // @TODO: Sort items by size in descending order.
+    items.sort((a, b) => b.getValue() - a.getValue());
+
     return items.map((item) => {
       const data = Helper.getData(item);
       return (
@@ -119,10 +135,10 @@ export default class List extends Component {
   render () {
     return (
       <Fragment>
-        <div className='list'>
+        <div className='list animated fadeIn slow'>
           {this.renderRoot()}
           {this.renderLevelUp()}
-          <div className='items'>
+          <div className='items' ref={this.listItemsRef}>
             {this.renderItems()}
           </div>
           <div className='help'>

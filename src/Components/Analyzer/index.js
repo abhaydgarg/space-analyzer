@@ -15,6 +15,7 @@ export default class Analyzer extends Component {
     super(props);
     this.chartInstance = null;
     this.state = {
+      isChartRendered: false,
       node: null
     };
   }
@@ -32,6 +33,7 @@ export default class Analyzer extends Component {
     // Get processed data from Echarts.
     const rootNode = Helper.getRootNode(this.chartInstance);
     this.setState({
+      isChartRendered: true,
       node: rootNode
     });
   }
@@ -51,7 +53,7 @@ export default class Analyzer extends Component {
 
   render () {
     return (
-      <div className='analyzer-container animated fadeIn slow'>
+      <div className='analyzer-container'>
         {this.state.node !== null &&
           <Breadcrumb
             node={this.state.node}
@@ -60,6 +62,7 @@ export default class Analyzer extends Component {
         }
         <div className='content'>
           <Chart
+            rendered={this.state.isChartRendered}
             rawData={this.props.data}
             getChartInstance={this.handleChartInstance}
             handleNode={this.handleNode}

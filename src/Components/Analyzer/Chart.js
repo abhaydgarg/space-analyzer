@@ -7,6 +7,7 @@ import Helper from '../../Helper';
 
 export default class Chart extends Component {
   static propTypes = {
+    rendered: PropTypes.bool.isRequired,
     rawData: PropTypes.object.isRequired,
     getChartInstance: PropTypes.func.isRequired,
     handleNode: PropTypes.func.isRequired
@@ -17,20 +18,16 @@ export default class Chart extends Component {
     this.chartContainerRef = React.createRef();
     this.chartRef = React.createRef();
     this.chart = null;
-    this.state = {
-      rendered: false
-    };
   }
 
   componentDidMount () {
     this.chart = this.chartRef.current.getEchartsInstance();
+    this.props.getChartInstance(this.chart);
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    // Render Chart once with raw data and use
-    // the processed data afterward.
-    // Chart update in click on its own.
-    if (this.state.rendered === true) {
+    // Render Chart once with raw data.
+    if (nextProps.rendered === true) {
       return false;
     }
     return true;
@@ -146,15 +143,6 @@ export default class Chart extends Component {
   //   });
   // }
 
-  handleChartReady = () => {
-    this.setState({
-      rendered: true
-    }, () => {
-      // Send chart instance.
-      this.props.getChartInstance(this.chart);
-    });
-  }
-
   handleClick = (params, e) => {
     let rootNode = Helper.getRootNode(e);
     if (params.data.kind === 'File') {
@@ -176,17 +164,8 @@ export default class Chart extends Component {
           ref={this.chartRef}
           option={this.getOption()}
           style={{ height: height, width: '100%' }}
-          showLoading={!this.state.rendered}
-          onChartReady={this.handleChartReady}
           onEvents={{
             'click': this.handleClick
-          }}
-          loadingOption={{
-            text: '',
-            color: '#f5f5f5',
-            textColor: '#f5f5f5',
-            maskColor: '#303030',
-            zlevel: 0
           }}
         />
       </div>
