@@ -11,15 +11,15 @@ import Analyzer from './Components/Analyzer';
 export default class RootContainer extends Component {
   constructor (props) {
     super(props);
-    // this.state = {
-    //   showAnalyzer: false,
-    //   data: null
-    // };
-    /* Use fixture and show analyzer screen on refresh */
     this.state = {
-      showAnalyzer: true,
-      data: require('./fixture.json')
+      showAnalyzer: false,
+      data: null
     };
+    // /* Use fixture and show analyzer screen on refresh */
+    // this.state = {
+    //   showAnalyzer: true,
+    //   data: require('./fixture.json')
+    // };
   }
 
   handleUploadBtn = () => {
