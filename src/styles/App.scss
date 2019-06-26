@@ -155,12 +155,6 @@ p {
 }
 
 /*** App ***/
-.tooltip {
-  font-size: 12px;
-  padding: 5px 12px;
-  background-color: rgba(33,33,33, 0.9);
-}
-
 .list-item-tooltip {
   font-size: 12px;
   text-align: initial;
@@ -174,7 +168,7 @@ p {
   height: 100%;
   align-items: center;
   justify-content: center;
-  > .content {
+  >.content {
     width: 50%;
     padding: 10px;
     background-color: $bgcolor-danger;
@@ -239,7 +233,7 @@ p {
   background-color: $bgcolor-white;
   box-shadow: inset 0 0 10px $color-gray-darken;
   color: $color-dark;
-  > .left-container {
+  >.left-container {
     display: flex;
     align-items: center;
     .logo {
@@ -250,7 +244,7 @@ p {
       margin-left: 5px;
     }
   }
-  > .right-container {
+  >.right-container {
     display: flex;
     align-items: center;
     margin-left: 10px;
@@ -277,11 +271,13 @@ p {
   display: flex;
   flex-direction: column;
   height: 100%;
-  > .breadcrumbs {
-    display: flex;
+  >.breadcrumbs-container {
     margin-bottom: 15px;
+    >.breadcrumbs {
+      display: flex;
+    }
   }
-  > .content {
+  >.content {
     display: flex;
     flex-grow: 1;
     // Firefox hack: min-height to make
@@ -291,24 +287,20 @@ p {
     @media (max-width: $bp-md) {
       flex-direction: column-reverse;
     }
-    > .chart {
+    >.chart {
       flex-grow: 1;
-      margin-right: 10px;
+      height: 100%;
       @media (max-width: $bp-md) {
-        margin-right: 0;
         margin-top: 15px;
         width: 100%;
       }
     }
-    > .list {
-      display: flex;
-      flex-direction: column;
+    >.list-container {
       margin-right: -15px;
-      overflow-x: hidden;
-      height: 100%;
+      margin-left: 25px;
       @media (max-width: $bp-md) {
         width: 100%;
-        height: 45%;
+        margin-left: 0;
       }
       @media (min-width: $bp-md) {
         width: 35%;
@@ -319,12 +311,18 @@ p {
       @media (min-width: $bp-xl) {
         width: 25%;
       }
-      > .help {
-        padding-right: 15px;
-        margin-top:5px;
-        text-align: justify;
-        font-size: 70%;
-        color: $color-gray-dark;
+      >.list {
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        height: 100%;
+        >.help {
+          padding-right: 15px;
+          margin-top:5px;
+          text-align: justify;
+          font-size: 70%;
+          color: $color-gray-dark;
+        }
       }
     }
   }
@@ -337,8 +335,8 @@ p {
   cursor: pointer;
   &:hover {
     color: $primary-color;
-    > .name {
-      > .icon {
+    >.name {
+      >.icon {
         color: $primary-color;
       }
     }
@@ -356,7 +354,7 @@ p {
       color: $primary-color-dark;
     }
   }
-  > .name {
+  >.name {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -365,7 +363,7 @@ p {
       margin-right: 5px;
     }
   }
-  > .size {
+  >.size {
     flex-shrink: 0;
     margin-left: 10px;
   }

@@ -18,26 +18,6 @@ export default class List extends Component {
     handleNode: PropTypes.func.isRequired
   };
 
-  constructor (props) {
-    super(props);
-    this.listItemsRef = React.createRef();
-  }
-
-  componentDidMount () {
-    this.listItemsRef.current.addEventListener('animationend', () => {
-      this.listItemsRef.current.classList.remove('animated', 'fadeIn');
-    });
-  }
-
-  componentWillUnmount () {
-    this.listItemsRef.current.removeEventListener('animationend', Helper.noop());
-  }
-
-  componentDidUpdate () {
-    // Play animation whenever comp is updated.
-    this.listItemsRef.current.classList.add('animated', 'fadeIn');
-  }
-
   handleNode = (node) => {
     this.props.handleNode(node);
   }
@@ -135,10 +115,10 @@ export default class List extends Component {
   render () {
     return (
       <Fragment>
-        <div className='list animated fadeIn slow'>
+        <div className='list animated fadeIn slower'>
           {this.renderRoot()}
           {this.renderLevelUp()}
-          <div className='items' ref={this.listItemsRef}>
+          <div className='items'>
             {this.renderItems()}
           </div>
           <div className='help'>

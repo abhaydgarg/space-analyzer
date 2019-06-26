@@ -54,12 +54,14 @@ export default class Analyzer extends Component {
   render () {
     return (
       <div className='analyzer-container'>
-        {this.state.node !== null &&
-          <Breadcrumb
-            node={this.state.node}
-            handleNode={this.handleNode}
-          />
-        }
+        <div className='breadcrumbs-container'>
+          {this.state.node !== null &&
+            <Breadcrumb
+              node={this.state.node}
+              handleNode={this.handleNode}
+            />
+          }
+        </div>
         <div className='content'>
           <Chart
             rendered={this.state.isChartRendered}
@@ -67,12 +69,14 @@ export default class Analyzer extends Component {
             getChartInstance={this.handleChartInstance}
             handleNode={this.handleNode}
           />
-          {this.state.node !== null &&
-            <List
-              node={this.state.node}
-              handleNode={this.handleNode}
-            />
-          }
+          <div className='list-container'>
+            {this.state.node !== null &&
+              <List
+                node={this.state.node}
+                handleNode={this.handleNode}
+              />
+            }
+          </div>
         </div>
       </div>
     );

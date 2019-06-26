@@ -15,7 +15,6 @@ export default class Chart extends Component {
 
   constructor (props) {
     super(props);
-    this.chartContainerRef = React.createRef();
     this.chartRef = React.createRef();
     this.chart = null;
   }
@@ -62,8 +61,8 @@ export default class Chart extends Component {
         name: 'space-analyzer',
         type: 'treemap',
         visibleMin: 300,
-        width: '95%',
-        height: '90%',
+        width: '100%',
+        height: '100%',
         left: 'left',
         top: 'top',
         // colorMappingBy: 'value',
@@ -155,15 +154,14 @@ export default class Chart extends Component {
   }
 
   render () {
-    const height = !this.chartContainerRef.current ? '500px' : `${this.chartContainerRef.current.clientHeight}px`;
     return (
-      <div className='chart' ref={this.chartContainerRef}>
+      <div className='chart animated bounce'>
         <ReactEcharts
           theme='light'
           notMerge
           ref={this.chartRef}
           option={this.getOption()}
-          style={{ height: height, width: '100%' }}
+          style={{ height: '100%', width: '100%' }}
           onEvents={{
             'click': this.handleClick
           }}
