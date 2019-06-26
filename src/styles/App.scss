@@ -284,15 +284,10 @@ p {
     // inner flexbox list of items
     // scroll.
     min-height: 0;
-    @media (max-width: $bp-md) {
-      flex-direction: column-reverse;
-    }
     >.chart {
       flex-grow: 1;
-      height: 100%;
       @media (max-width: $bp-md) {
-        margin-top: 15px;
-        width: 100%;
+        display: none;
       }
     }
     >.list-container {
