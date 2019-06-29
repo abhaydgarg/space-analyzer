@@ -23,3 +23,7 @@ npm install
 # To run.
 npm start
 ```
+
+## Todo
+
+- Check feasibility to use async approach to render chart and list for large dataset where browser hangs for a while when rendering analyzer screen while navigating deep in directory and at the time when data is being read from large dataset.
