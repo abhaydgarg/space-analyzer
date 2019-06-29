@@ -155,18 +155,16 @@ export default class Chart extends Component {
 
   render () {
     return (
-      <div className='chart animated bounce'>
-        <ReactEcharts
-          theme='light'
-          notMerge
-          ref={this.chartRef}
-          option={this.getOption()}
-          style={{ height: '100%', width: '100%' }}
-          onEvents={{
-            'click': this.handleClick
-          }}
-        />
-      </div>
+      <ReactEcharts
+        theme='light'
+        notMerge
+        ref={this.chartRef}
+        option={this.getOption()}
+        style={{ height: '100%', width: '100%' }}
+        onEvents={{
+          'click': this.handleClick
+        }}
+      />
     );
   }
 }

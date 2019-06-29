@@ -53,8 +53,8 @@ export default class Analyzer extends Component {
 
   render () {
     return (
-      <div className='analyzer-container'>
-        <div className='breadcrumbs-container'>
+      <div className='analyzer'>
+        <div className='analyzer__breadcrumb'>
           {this.state.node !== null &&
             <Breadcrumb
               node={this.state.node}
@@ -62,14 +62,16 @@ export default class Analyzer extends Component {
             />
           }
         </div>
-        <div className='content'>
-          <Chart
-            rendered={this.state.isChartRendered}
-            rawData={this.props.data}
-            getChartInstance={this.handleChartInstance}
-            handleNode={this.handleNode}
-          />
-          <div className='list-container'>
+        <div className='analyzer__main'>
+          <div className='analyzer__chart animated bounce'>
+            <Chart
+              rendered={this.state.isChartRendered}
+              rawData={this.props.data}
+              getChartInstance={this.handleChartInstance}
+              handleNode={this.handleNode}
+            />
+          </div>
+          <div className='analyzer__list'>
             {this.state.node !== null &&
               <List
                 node={this.state.node}

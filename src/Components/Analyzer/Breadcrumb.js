@@ -23,29 +23,29 @@ export default class Breadcrumb extends Component {
 
   render () {
     return (
-      <div className='breadcrumbs animated fadeIn slower'>
-        <nav className='nav'>
+      <div className='breadcrumb animated fadeIn slower'>
+        <nav className='breadcrumb__nav'>
           {
             this.getAllParent().map((item, index) => {
               return (
                 <div
-                  className='breadcrumb'
+                  className='breadcrumb__item'
                   key={index}
                   onClick={() => this.handleNode(item)}
                 >
-                  <span className='sep'>
+                  <span className='breadcrumb__sep'>
                     <FontAwesomeIcon icon={faFolder} size='sm' />
                   </span>
-                  <span className='item'>{item.name}</span>
+                  <span className='breadcrumb__name'>{item.name}</span>
                 </div>
               );
             })
           }
-          <div className='breadcrumb'>
-            <span className='sep'>
+          <div className='breadcrumb__item'>
+            <span className='breadcrumb__sep'>
               <FontAwesomeIcon icon={faFolder} size='sm' />
             </span>
-            <span className='item'>{this.props.node.name}</span>
+            <span className='breadcrumb__name'>{this.props.node.name}</span>
           </div>
         </nav>
       </div>

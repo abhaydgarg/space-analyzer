@@ -82,8 +82,8 @@ export default function FileUpload (props) {
 
   if (loading === true) {
     return (
-      <div className='fileupload-loading-container'>
-        <div className='content animated fadeIn faster'>
+      <div className='fileupload-loading'>
+        <div className='fileupload-loading__content animated fadeIn faster'>
           <h1>{percentage}%</h1>
           <p className='txt-sm txt-primary'>{loadingMessage}</p>
         </div>
@@ -94,10 +94,10 @@ export default function FileUpload (props) {
   return (
     <div
       {...getRootProps()}
-      className='fileupload-container animated fadeIn slow'
+      className='fileupload animated fadeIn slower'
       style={{ borderColor: setBorderColor() }}
     >
-      <div className='content'>
+      <div className='fileupload__content'>
         <input {...getInputProps()} />
         <p>Drag 'n' drop file here, or click to select file.</p>
         <p className='txt-xs txt-muted'>Only <em className='txt-primary'>single json</em> file is accepted.</p>

@@ -60,16 +60,16 @@ export default class List extends Component {
 
   renderRoot = () => {
     return (
-      <div className='item root'>
-        <span className='name'>{this.props.node.name}</span>
-        <span className='size'>{prettyBytes(this.props.node.getValue())}</span>
+      <div className='list__item list__item--root'>
+        <span className='list__name'>{this.props.node.name}</span>
+        <span className='list__size'>{prettyBytes(this.props.node.getValue())}</span>
       </div>
     );
   }
 
   renderLevelUp = () => {
     return (
-      <div className='item level-up' onClick={this.handleLevelUp}>
+      <div className='list__item list__item--level-up' onClick={this.handleLevelUp}>
         <FontAwesomeIcon icon={faLevelUpAlt} size='sm' />
         <FontAwesomeIcon icon={faEllipsisH} size='sm' />
       </div>
@@ -95,17 +95,17 @@ export default class List extends Component {
           animateFill={false}
           followCursor
           maxWidth='320px'
-          className='list-item-tooltip'
+          className='tooltip--list-item'
           content={this.getTooltipContent(data)}
           onTrigger={this.handleTooltipTrigger}
           onShow={this.handleTooltipShow}
         >
-          <div className='item' onClick={() => this.handleNode(item)}>
-            <span className='name'>
-              <FontAwesomeIcon icon={icons[data.kind]} size='sm' className='icon' />
+          <div className='list__item' onClick={() => this.handleNode(item)}>
+            <span className='list__name'>
+              <FontAwesomeIcon icon={icons[data.kind]} size='sm' className='list__icon' />
               {item.name}
             </span>
-            <span className='size'>{prettyBytes(data.size)}</span>
+            <span className='list__size'>{prettyBytes(data.size)}</span>
           </div>
         </Tippy>
       );
@@ -118,10 +118,10 @@ export default class List extends Component {
         <div className='list animated fadeIn slower'>
           {this.renderRoot()}
           {this.renderLevelUp()}
-          <div className='items'>
+          <div className='list__items'>
             {this.renderItems()}
           </div>
-          <div className='help'>
+          <div className='list__help'>
             Press and hold <b>CONTROL</b> key and hover mouse over list above for detail view.
           </div>
         </div>

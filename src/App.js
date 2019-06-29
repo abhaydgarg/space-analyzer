@@ -6,7 +6,7 @@ import { Component } from 'react';
 
 import 'normalize.css/normalize.css';
 import './styles/animate.css';
-import './styles/App.scss';
+import './styles/scss/App.scss';
 
 import RootContainer from './RootContainer';
 import NoFileReader from './Components/NoFileReader';

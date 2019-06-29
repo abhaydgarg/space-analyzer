@@ -1,0 +1,27 @@
+.fileupload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  border-width: 2px;
+  border-radius: 2px;
+  border-style: dashed;
+  background-color: $bgcolor-light;
+  outline: none;
+  transition: border .24s ease-in-out;
+  &__content {
+    text-align: center;
+    padding: 10px;
+  }
+}
+
+.fileupload-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  &__content {
+    text-align: center;
+    padding: 10px;
+  }
+}

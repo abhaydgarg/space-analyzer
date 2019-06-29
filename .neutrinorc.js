@@ -1,6 +1,6 @@
 module.exports = {
   options: {
-    output: 'docs',
+    output: 'docs'
   },
   use: [
     ['@neutrinojs/react', {

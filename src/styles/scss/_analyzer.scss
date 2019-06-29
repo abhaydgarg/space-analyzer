@@ -1,0 +1,40 @@
+.analyzer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &__breadcrumb {
+    margin-bottom: 15px;
+  }
+  &__main {
+    display: flex;
+    flex-grow: 1;
+    // Firefox hack: min-height to make
+    // inner flexbox list of items
+    // scroll.
+    min-height: 0;
+  }
+  &__chart {
+    flex-grow: 1;
+    @media (max-width: $bp-md) {
+      display: none;
+    }
+  }
+  &__list {
+    margin-right: -15px;
+    margin-left: 25px;
+    @media (max-width: $bp-md) {
+      width: 100%;
+      margin-left: 0;
+    }
+    @media (min-width: $bp-md) {
+      width: 35%;
+    }
+    @media (min-width: $bp-lg) {
+      width: 30%;
+    }
+    @media (min-width: $bp-xl) {
+      width: 25%;
+    }
+  }
+}
+

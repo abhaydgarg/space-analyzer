@@ -14,18 +14,18 @@ export default function Footer (props) {
 
   return (
     <footer className='footer'>
-      <div className='left-container'>
-        <img className='logo' src='./static/icon-black.svg' />
-        <span className='site-title'>Space analyzer</span>
+      <div className='footer__left'>
+        <img className='footer__logo' src='./static/icon-black.svg' />
+        <span className='footer__title'>Space analyzer</span>
       </div>
-      <div className='right-container'>
+      <div className='footer__right'>
         <Tippy
           content='Upload'
           animateFill={false}
           animation='scale'
           className='tooltip'
         >
-          <button className='btn-upload' onClick={handleUploadBtn}>
+          <button className='footer__btn-upload' onClick={handleUploadBtn}>
             <FontAwesomeIcon icon={faUpload} size='lg' />
           </button>
         </Tippy>
@@ -35,7 +35,7 @@ export default function Footer (props) {
           animation='scale'
           className='tooltip'
         >
-          <button className='btn-help' onClick={handleHelpBtn}>
+          <button className='footer__btn-help' onClick={handleHelpBtn}>
             <FontAwesomeIcon icon={faInfoCircle} size='lg' />
           </button>
         </Tippy>
